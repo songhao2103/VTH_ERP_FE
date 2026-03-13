@@ -6,7 +6,7 @@ export const MenuContext = createContext<IMenuContext | undefined>(undefined);
 export const useMenuContext = () => {
   const context = useContext(MenuContext);
   if (!context) {
-    throw new Error("context input chưa được khởi tạo!");
+    throw new Error("MenuContext chưa được khởi tạo");
   }
   return context;
 };
@@ -34,7 +34,6 @@ export const menuConfig: IMenuItemConfig[] = [
   },
   {
     title: "Người dùng",
-    icon: "users",
     collapse: true,
     rootPath: "/users",
     children: [
@@ -88,18 +87,15 @@ export const menuConfig: IMenuItemConfig[] = [
   },
   {
     title: "Cài đặt",
-
     path: "/settings",
   },
   {
     title: "Quản trị hệ thống",
-
     path: "/admin",
     isOnlyForAdmin: true,
   },
   {
     title: "Tính năng sắp ra mắt",
-
     disabled: true,
   },
 ];

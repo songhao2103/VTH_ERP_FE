@@ -1,40 +1,73 @@
 import { useMenuContext } from "@/components/menu/constant";
+import { getItemKey, hasChildren } from "@/components/menu/util";
 import MenuItem from "@/components/menu/MenuItem";
 import type { IMenuNodeProps } from "@/components/menu/type";
-import React from "react";
+import clsx from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
+import React from "react";
 
-const MenuNode: React.FC<IMenuNodeProps> = ({ level, item }) => {
+const MenuNode: React.FC<IMenuNodeProps> = ({ level, item, theme }) => {
   const { isOpenAccordion } = useMenuContext();
 
-  const hasChildren = !!item.children?.length;
-  const isOpen = hasChildren && isOpenAccordion(item.rootPath || "");
+  if (item.heading) {
+    return (
+      <div
+        className={clsx(
+          "px-3 pb-2 pt-5 text-[11px] font-semibold uppercase tracking-[0.18em]",
+          theme === "dark" ? "text-zinc-400" : "text-zinc-500",
+        )}
+      >
+        {item.heading}
+      </div>
+    );
+  }
+
+  if (item.separator) {
+    return (
+      <div
+        className={clsx(
+          "my-3 border-t",
+          theme === "dark" ? "border-zinc-800" : "border-zinc-200",
+        )}
+      />
+    );
+  }
+
+  const hasChildNodes = hasChildren(item);
+  const isOpen = hasChildNodes && isOpenAccordion(item.rootPath || "");
 
   return (
     <div>
       <MenuItem
         item={item}
         level={level}
-        hasChildren={hasChildren}
+        hasChildren={hasChildNodes}
         isOpen={isOpen}
+        theme={theme}
       />
 
       <AnimatePresence initial={false}>
-        {isOpen && (
+        {hasChildNodes && isOpen && (
           <motion.div
-            key="children"
+            key={item.rootPath || item.path}
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.2, ease: "easeInOut" }}
-            className="ml-4 overflow-hidden border-l"
+            className="overflow-hidden"
           >
-            <div className="py-1">
-              {item.children?.map((child) => (
+            <div
+              className={clsx(
+                "ml-6 border-l pl-2",
+                theme === "dark" ? "border-zinc-800" : "border-zinc-200",
+              )}
+            >
+              {item.children?.map((child, index) => (
                 <MenuNode
-                  key={child.path || child.rootPath}
+                  key={getItemKey(child, index)}
                   item={child}
                   level={level + 1}
+                  theme={theme}
                 />
               ))}
             </div>

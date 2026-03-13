@@ -1,13 +1,9 @@
-import MenuInner from "@/components/menu/MenuInner";
-import MenuProvider from "@/components/menu/MenuProvider";
+import Sidebar from "@/components/menu/MenuSidebar";
+import type { IMenuProps } from "@/components/menu/type";
 import React from "react";
 
-const Menu = () => {
-  return (
-    <MenuProvider>
-      <MenuInner />
-    </MenuProvider>
-  );
+const Menu: React.FC<IMenuProps> = (props) => {
+  return <Sidebar {...props} />;
 };
 
 export default Menu;
