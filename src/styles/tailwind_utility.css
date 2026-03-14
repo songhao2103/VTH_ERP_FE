@@ -1,0 +1,498 @@
+/* #region TRANSITION */
+@utility transition-interactive {
+  transition-property:
+    color, background-color, border-color, opacity, box-shadow, transform;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  @variant motion-reduce {
+    transition-property: none;
+    transition-duration: 0ms;
+  }
+}
+
+@utility transition-transform-soft {
+  transition-property: transform;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+
+  @variant motion-reduce {
+    transition-property: none;
+    transition-duration: 0ms;
+  }
+}
+
+@utility transition-transform-smooth {
+  transition-property: transform;
+  transition-duration: 260ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  transform-origin: center;
+
+  @variant motion-reduce {
+    transition-property: none;
+    transition-duration: 0ms;
+  }
+}
+
+@utility transition-fade {
+  transition-property: opacity, visibility;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  @variant motion-reduce {
+    transition-property: none;
+    transition-duration: 0ms;
+  }
+}
+
+@utility transition-collapse {
+  transition-property: height, max-height, opacity, transform;
+  transition-duration: 220ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  @variant motion-reduce {
+    transition-property: none;
+    transition-duration: 0ms;
+  }
+}
+/* #endregion */
+
+/* #region TEXT HOVER */
+@utility hover-text-primary {
+  transition-property: color, background-color, border-color, box-shadow;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  @variant hover {
+    color: rgb(var(--color-primary-rgb) / 1);
+  }
+}
+
+@utility hover-text-brand {
+  transition-property: color, background-color, border-color, box-shadow;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  @variant hover {
+    color: rgb(var(--color-brand-rgb) / 1);
+  }
+}
+
+@utility hover-text-success {
+  transition-property: color, background-color, border-color, box-shadow;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  @variant hover {
+    color: rgb(var(--color-success-rgb) / 1);
+  }
+}
+
+@utility hover-text-info {
+  transition-property: color, background-color, border-color, box-shadow;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  @variant hover {
+    color: rgb(var(--color-info-rgb) / 1);
+  }
+}
+
+@utility hover-text-warning {
+  transition-property: color, background-color, border-color, box-shadow;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  @variant hover {
+    color: rgb(var(--color-warning-rgb) / 1);
+  }
+}
+
+@utility hover-text-danger {
+  transition-property: color, background-color, border-color, box-shadow;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  @variant hover {
+    color: rgb(var(--color-danger-rgb) / 1);
+  }
+}
+/* #endregion */
+
+/* #region BACKGROUND / BOX HOVER */
+@utility hover-bg-primary-soft {
+  transition-property: color, background-color, border-color, box-shadow;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  @variant hover {
+    background-color: rgb(var(--color-primary-rgb) / 0.12);
+    color: rgb(var(--text-primary) / 1);
+    border-color: rgb(var(--color-primary-rgb) / 0.24);
+  }
+}
+
+@utility hover-bg-brand-soft {
+  transition-property: color, background-color, border-color, box-shadow;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  @variant hover {
+    background-color: rgb(var(--color-brand-rgb) / 0.12);
+    color: rgb(var(--text-primary) / 1);
+    border-color: rgb(var(--color-brand-rgb) / 0.24);
+  }
+}
+
+@utility hover-bg-success-soft {
+  transition-property: color, background-color, border-color, box-shadow;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  @variant hover {
+    background-color: rgb(var(--color-success-rgb) / 0.12);
+    color: rgb(var(--text-primary) / 1);
+    border-color: rgb(var(--color-success-rgb) / 0.24);
+  }
+}
+
+@utility hover-bg-info-soft {
+  transition-property: color, background-color, border-color, box-shadow;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  @variant hover {
+    background-color: rgb(var(--color-info-rgb) / 0.12);
+    color: rgb(var(--text-primary) / 1);
+    border-color: rgb(var(--color-info-rgb) / 0.24);
+  }
+}
+
+@utility hover-bg-warning-soft {
+  transition-property: color, background-color, border-color, box-shadow;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  @variant hover {
+    background-color: rgb(var(--color-warning-rgb) / 0.12);
+    color: rgb(var(--text-primary) / 1);
+    border-color: rgb(var(--color-warning-rgb) / 0.24);
+  }
+}
+
+@utility hover-bg-danger-soft {
+  transition-property: color, background-color, border-color, box-shadow;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  @variant hover {
+    background-color: rgb(var(--color-danger-rgb) / 0.12);
+    color: rgb(var(--text-primary) / 1);
+    border-color: rgb(var(--color-danger-rgb) / 0.24);
+  }
+}
+/* #endregion */
+
+/* #region BORDER HOVER */
+@utility hover-border-primary {
+  transition-property: color, background-color, border-color, box-shadow;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  @variant hover {
+    border-color: rgb(var(--color-primary-rgb) / 1);
+  }
+}
+
+@utility hover-border-brand {
+  transition-property: color, background-color, border-color, box-shadow;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  @variant hover {
+    border-color: rgb(var(--color-brand-rgb) / 1);
+  }
+}
+/* #endregion */
+
+/* #region GENERIC INTERACTIVE HOVER */
+@utility hover-surface {
+  transition-property: color, background-color, border-color, box-shadow;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  @variant hover {
+    background-color: rgb(var(--surface-popover) / 1);
+    color: rgb(var(--text-primary) / 1);
+    border-color: rgb(var(--border-default) / 1);
+  }
+}
+
+@utility hover-surface-soft {
+  transition-property: color, background-color, border-color, box-shadow;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  @variant hover {
+    background-color: rgb(var(--surface-card) / 0.72);
+    color: rgb(var(--text-primary) / 1);
+    border-color: rgb(var(--border-default) / 0.72);
+  }
+}
+/* #endregion */
+
+/* #region  ROTATE HOVER */
+@utility hover-rotate-45 {
+  transition-property: transform;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+
+  @variant hover {
+    transform: rotate(45deg);
+  }
+
+  @variant motion-reduce {
+    transition-property: none;
+  }
+}
+
+@utility hover-rotate-90 {
+  transition-property: transform;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+
+  @variant hover {
+    transform: rotate(90deg);
+  }
+
+  @variant motion-reduce {
+    transition-property: none;
+  }
+}
+
+@utility hover-rotate-180 {
+  transition-property: transform;
+  transition-duration: 220ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+
+  @variant hover {
+    transform: rotate(180deg);
+  }
+
+  @variant motion-reduce {
+    transition-property: none;
+  }
+}
+/* #endregion */
+
+/* #region SCALE HOVER / ACTIVE */
+@utility hover-scale-soft {
+  transition-property: transform;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+
+  @variant hover {
+    transform: scale(1.02);
+  }
+
+  @variant motion-reduce {
+    transition-property: none;
+  }
+}
+
+@utility hover-scale-md {
+  transition-property: transform;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+
+  @variant hover {
+    transform: scale(1.04);
+  }
+
+  @variant motion-reduce {
+    transition-property: none;
+  }
+}
+
+@utility active-scale-down {
+  transition-property: transform;
+  transition-duration: 120ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+
+  @variant active {
+    transform: scale(0.98);
+  }
+
+  @variant motion-reduce {
+    transition-property: none;
+  }
+}
+/* #endregion */
+
+/* #region LIFT / FLOAT HOVER */
+@utility hover-lift-xs {
+  transition-property: transform, box-shadow;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  @variant hover {
+    transform: translateY(-1px);
+  }
+
+  @variant motion-reduce {
+    transition-property: none;
+  }
+}
+
+@utility hover-lift-sm {
+  transition-property: transform, box-shadow;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+
+  @variant hover {
+    transform: translateY(-2px);
+  }
+
+  @variant motion-reduce {
+    transition-property: none;
+  }
+}
+
+@utility hover-lift-md {
+  transition-property: transform, box-shadow;
+  transition-duration: 220ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+
+  @variant hover {
+    transform: translateY(-4px);
+  }
+
+  @variant motion-reduce {
+    transition-property: none;
+  }
+}
+
+/* #endregion */
+
+/* #region  SLIDE / NUDGE HOVER */
+@utility hover-slide-right-xs {
+  transition-property: transform;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  @variant hover {
+    transform: translateX(2px);
+  }
+
+  @variant motion-reduce {
+    transition-property: none;
+  }
+}
+
+@utility hover-slide-right-sm {
+  transition-property: transform;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+
+  @variant hover {
+    transform: translateX(4px);
+  }
+
+  @variant motion-reduce {
+    transition-property: none;
+  }
+}
+
+@utility hover-slide-up-xs {
+  transition-property: transform;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  @variant hover {
+    transform: translateY(-2px);
+  }
+
+  @variant motion-reduce {
+    transition-property: none;
+  }
+}
+/* #endregion */
+
+/* #region  FADE / EMPHASIS */
+@utility hover-opacity-strong {
+  transition-property: opacity;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.88;
+
+  @variant hover {
+    opacity: 1;
+  }
+
+  @variant motion-reduce {
+    transition-property: none;
+  }
+}
+
+@utility hover-opacity-soft {
+  transition-property: opacity;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.72;
+
+  @variant hover {
+    opacity: 1;
+  }
+
+  @variant motion-reduce {
+    transition-property: none;
+  }
+}
+
+/* #endregion */
+
+/* #region PRESSABLE */
+@utility pressable {
+  transition-property:
+    transform, color, background-color, border-color, box-shadow, opacity;
+  transition-duration: 160ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  @variant active {
+    transform: scale(0.98);
+  }
+
+  @variant motion-reduce {
+    transition-property: none;
+  }
+}
+/* #endregion */
+
+/* #region CARET / CONTROLLED STATE */
+@utility caret-expand {
+  transition-property: transform;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+
+  @variant motion-reduce {
+    transition-property: none;
+    transition-duration: 0ms;
+  }
+}
+
+@utility caret-open {
+  transform: rotate(90deg);
+}
+
+@utility caret-open-down {
+  transform: rotate(180deg);
+}
+/* #endregion */

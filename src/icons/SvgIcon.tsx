@@ -1,4 +1,4 @@
-import { SVG_ICONS } from "@/icons/constant";
+import { SVG_ICONS } from "@/icons/constant.tsx";
 import type { ISvgIconProps } from "@/icons/type";
 import clsx from "clsx";
 import React from "react";
@@ -9,9 +9,7 @@ const SvgIcon = React.forwardRef<SVGSVGElement, ISvgIconProps>(
 
     if (!config) return null;
 
-    const { d, class: classCof } = config;
-
-    console.log(classCof);
+    const { children, class: classCof } = config;
     return (
       <svg
         ref={ref}
@@ -26,23 +24,7 @@ const SvgIcon = React.forwardRef<SVGSVGElement, ISvgIconProps>(
         className={clsx(classCof, className)}
         {...props}
       >
-        <path d={d} />
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="lucide lucide-circle-user-round-icon lucide-circle-user-round"
-        >
-          <path d="M18 20a6 6 0 0 0-12 0" />
-          <circle cx="12" cy="10" r="4" />
-          <circle cx="12" cy="12" r="10" />
-        </svg>
+        {children}
       </svg>
     );
   },
