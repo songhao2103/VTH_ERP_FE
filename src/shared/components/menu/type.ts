@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-object-type */
 
 import type { TIconName } from "@/icons/constant";
-import type { ReactNode } from "react";
+import type { ReactNode, RefObject } from "react";
 
 export type TMenuTheme = "dark" | "light";
 
@@ -93,6 +93,7 @@ export interface ICollapsedMenuProps {
 export interface IFlyoutMenuProps {
   items: IMenuItemConfig[];
   level?: number;
+  anchorRef: RefObject<HTMLElement | null>;
 }
 
 export interface IMobileMenuProps {

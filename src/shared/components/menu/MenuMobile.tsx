@@ -1,5 +1,6 @@
 import MenuInner from "@/shared/components/menu/MenuInner";
 import type { IMobileMenuProps } from "@/shared/components/menu/type";
+import { useRouterState } from "@tanstack/react-router";
 import clsx from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
@@ -31,10 +32,13 @@ const HamburgerIcon = ({ open }: { open: boolean }) => {
 
 const MobileMenu: React.FC<IMobileMenuProps> = ({ items }) => {
   const [open, setOpen] = useState(false);
-  //   const { pathname } = useLocation();
-  const pathname = "/";
+
+  const pathname = useRouterState({
+    select: (state) => state.location.pathname,
+  });
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setOpen(false);
   }, [pathname]);
 

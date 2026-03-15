@@ -4,6 +4,7 @@ import type {
   IMenuContext,
   IMenuProviderProps,
 } from "@/shared/components/menu/type";
+import { useRouterState } from "@tanstack/react-router";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 const MenuProvider: React.FC<IMenuProviderProps> = ({
@@ -12,8 +13,10 @@ const MenuProvider: React.FC<IMenuProviderProps> = ({
   isCollapsed = false,
   isAdmin = false,
 }) => {
-  // const { pathname } = useLocation();
-  const pathname = "/";
+  const pathname = useRouterState({
+    select: (state) => state.location.pathname,
+  });
+
   const [openAccordions, setOpenAccordions] = useState<Set<string>>(new Set());
 
   const toggleAccordion = useCallback((path: string) => {
@@ -52,11 +55,9 @@ const MenuProvider: React.FC<IMenuProviderProps> = ({
 
     if (!activeKeys.length) return;
 
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setOpenAccordions((prev) => {
       const next = new Set(prev);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      activeKeys.forEach((key: any) => next.add(key));
+      activeKeys.forEach((key) => next.add(key));
       return next;
     });
   }, [items, pathname]);

@@ -1,6 +1,6 @@
 import { useMenuContext } from "@/shared/components/menu/constant";
 import {
-  filterMenuByRole,
+  getCollapsedRootItems,
   getItemKey,
   hasChildren,
   isItemActive,
@@ -12,7 +12,7 @@ import type {
 } from "@/shared/components/menu/type";
 import clsx from "clsx";
 import { AnimatePresence } from "framer-motion";
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import FlyoutMenu from "@/shared/components/menu/MenuFlyout";
 import { Link } from "@tanstack/react-router";
 
@@ -81,60 +81,58 @@ const CollapsedMenuItem: React.FC<{
   );
 };
 
+const CollapsedMenuRootItem: React.FC<{
+  item: IMenuItemConfig;
+  itemKey: string;
+  hoveredKey: string | null;
+  setHoveredKey: (key: string | null) => void;
+}> = ({ item, itemKey, hoveredKey, setHoveredKey }) => {
+  const children = hasChildren(item);
+  const anchorRef = useRef<HTMLDivElement | null>(null);
+
+  return (
+    <div
+      ref={anchorRef}
+      className="relative"
+      onMouseEnter={() => setHoveredKey(itemKey)}
+    >
+      <CollapsedMenuItem item={item} onHover={() => setHoveredKey(itemKey)} />
+
+      <AnimatePresence initial={false}>
+        {children && hoveredKey === itemKey && item.children && (
+          <FlyoutMenu items={item.children} anchorRef={anchorRef} />
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
 const CollapsedMenu: React.FC<ICollapsedMenuProps> = ({ items }) => {
   const { isAdmin } = useMenuContext();
+
   const visibleItems = useMemo(
-    () => filterMenuByRole(items, isAdmin),
+    () => getCollapsedRootItems(items, isAdmin),
     [isAdmin, items],
   );
 
-  const [hoveredItem, setHoveredItem] = useState<IMenuItemConfig | null>(null);
+  const [hoveredKey, setHoveredKey] = useState<string | null>(null);
 
   return (
     <div
       className="relative flex h-full flex-col gap-2"
-      onMouseLeave={() => setHoveredItem(null)}
+      onMouseLeave={() => setHoveredKey(null)}
     >
       {visibleItems.map((item, index) => {
-        if (item.heading) {
-          return (
-            <div
-              key={getItemKey(item, index)}
-              className="mx-auto mt-2 h-px w-8 bg-zinc-800"
-            />
-          );
-        }
-
-        if (item.separator) {
-          return (
-            <div
-              key={getItemKey(item, index)}
-              className="mx-auto my-1 h-px w-10 bg-zinc-800"
-            />
-          );
-        }
-
         const currentKey = getItemKey(item, index);
-        const hoveredKey = hoveredItem ? getItemKey(hoveredItem) : null;
-        const children = hasChildren(item);
 
         return (
-          <div
+          <CollapsedMenuRootItem
             key={currentKey}
-            className="relative"
-            onMouseEnter={() => setHoveredItem(item)}
-          >
-            <CollapsedMenuItem
-              item={item}
-              onHover={() => setHoveredItem(item)}
-            />
-
-            <AnimatePresence>
-              {children && hoveredKey === currentKey && item.children && (
-                <FlyoutMenu items={item.children} />
-              )}
-            </AnimatePresence>
-          </div>
+            item={item}
+            itemKey={currentKey}
+            hoveredKey={hoveredKey}
+            setHoveredKey={setHoveredKey}
+          />
         );
       })}
     </div>

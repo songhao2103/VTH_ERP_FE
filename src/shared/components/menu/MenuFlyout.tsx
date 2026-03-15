@@ -11,8 +11,14 @@ import type {
 } from "@/shared/components/menu/type";
 import clsx from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
-import React, { useMemo, useState } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { Link } from "@tanstack/react-router";
+
+const GAP = 12;
+const SUB_GAP = 8;
+const MENU_WIDTH = 256;
+const VIEWPORT_PADDING = 8;
 
 const FlyoutRow: React.FC<{
   item: IMenuItemConfig;
@@ -39,11 +45,13 @@ const FlyoutRow: React.FC<{
         className="h-8 w-8"
       />
       <span className="min-w-0 flex-1 truncate">{item.title}</span>
+
       {item.badge && (
         <span className="rounded-full bg-secondary/15 px-2 py-0.5 text-[10px] font-bold text-secondary">
           {item.badge}
         </span>
       )}
+
       {children && <span className="text-xs">›</span>}
     </>
   );
@@ -77,10 +85,46 @@ const FlyoutRow: React.FC<{
   );
 };
 
-const FlyoutMenu: React.FC<IFlyoutMenuProps> = ({ items, level = 1 }) => {
-  const [hoveredItem, setHoveredItem] = useState<IMenuItemConfig | null>(null);
+const FlyoutBranch: React.FC<IFlyoutMenuProps> = ({
+  items,
+  level = 1,
+  anchorRef,
+}) => {
+  const [hoveredKey, setHoveredKey] = useState<string | null>(null);
+  const [position, setPosition] = useState({ top: 0, left: 0 });
 
-  const visibleItems = useMemo(() => items, [items]);
+  useLayoutEffect(() => {
+    const updatePosition = () => {
+      const anchor = anchorRef.current;
+      if (!anchor) return;
+
+      const rect = anchor.getBoundingClientRect();
+
+      let left = rect.right + (level === 1 ? GAP : SUB_GAP);
+      let top = rect.top;
+
+      const maxLeft = window.innerWidth - MENU_WIDTH - VIEWPORT_PADDING;
+      if (left > maxLeft) {
+        left = Math.max(VIEWPORT_PADDING, maxLeft);
+      }
+
+      const maxTop = window.innerHeight - VIEWPORT_PADDING;
+      if (top > maxTop) {
+        top = maxTop;
+      }
+
+      setPosition({ top, left });
+    };
+
+    updatePosition();
+    window.addEventListener("resize", updatePosition);
+    window.addEventListener("scroll", updatePosition, true);
+
+    return () => {
+      window.removeEventListener("resize", updatePosition);
+      window.removeEventListener("scroll", updatePosition, true);
+    };
+  }, [anchorRef, level]);
 
   return (
     <motion.div
@@ -88,13 +132,17 @@ const FlyoutMenu: React.FC<IFlyoutMenuProps> = ({ items, level = 1 }) => {
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: 8 }}
       transition={{ duration: 0.16 }}
-      className={clsx(
-        "absolute top-0 z-50 min-w-64 rounded-xl border border-zinc-800 bg-black p-2 shadow-2xl",
-        level === 1 ? "left-full ml-3" : "left-full ml-2",
-      )}
+      style={{
+        position: "fixed",
+        top: position.top,
+        left: position.left,
+        width: MENU_WIDTH,
+      }}
+      className="z-[999] rounded-xl border border-zinc-800 bg-black p-2 shadow-2xl"
+      onMouseLeave={() => setHoveredKey(null)}
     >
       <div className="relative">
-        {visibleItems.map((item, index) => {
+        {items.map((item, index) => {
           if (item.heading) {
             return (
               <div
@@ -117,19 +165,27 @@ const FlyoutMenu: React.FC<IFlyoutMenuProps> = ({ items, level = 1 }) => {
 
           const children = hasChildren(item);
           const currentKey = getItemKey(item, index);
-          const hoveredKey = hoveredItem ? getItemKey(hoveredItem) : null;
+          const childAnchorRef = useRef<HTMLDivElement | null>(null);
 
           return (
             <div
               key={currentKey}
+              ref={childAnchorRef}
               className="relative"
-              onMouseEnter={() => setHoveredItem(item)}
+              onMouseEnter={() => setHoveredKey(currentKey)}
             >
-              <FlyoutRow item={item} onHover={() => setHoveredItem(item)} />
+              <FlyoutRow
+                item={item}
+                onHover={() => setHoveredKey(currentKey)}
+              />
 
-              <AnimatePresence>
+              <AnimatePresence initial={false}>
                 {children && hoveredKey === currentKey && item.children && (
-                  <FlyoutMenu items={item.children} level={level + 1} />
+                  <FlyoutMenu
+                    items={item.children}
+                    level={level + 1}
+                    anchorRef={childAnchorRef}
+                  />
                 )}
               </AnimatePresence>
             </div>
@@ -138,6 +194,11 @@ const FlyoutMenu: React.FC<IFlyoutMenuProps> = ({ items, level = 1 }) => {
       </div>
     </motion.div>
   );
+};
+
+const FlyoutMenu: React.FC<IFlyoutMenuProps> = (props) => {
+  if (typeof document === "undefined") return null;
+  return createPortal(<FlyoutBranch {...props} />, document.body);
 };
 
 export default FlyoutMenu;

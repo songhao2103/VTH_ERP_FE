@@ -10,7 +10,7 @@ const SidebarHeader: React.FC<SidebarHeaderProps> = ({
   onToggle,
 }) => {
   return (
-    <div className="px-4.5 py-4.5 relative">
+    <div className="px-4.5 py-4.5 relative lg:block hidden">
       <p
         className="font-bold text-title-xl data-[hidden=true]:hidden"
         data-hidden={collapsed}

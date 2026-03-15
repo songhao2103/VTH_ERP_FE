@@ -14,13 +14,15 @@ const Menu: React.FC<IMenuProps> = ({ menus = [], collapsed, isAdmin }) => {
         </MenuProvider>
       </div>
 
-      <div className="h-full overflow-y-auto p-3">
+      <div className="hidden h-full p-3 lg:block">
         <MenuProvider items={menus} isCollapsed={collapsed} isAdmin={isAdmin}>
-          {collapsed ? (
-            <CollapsedMenu items={menus} />
-          ) : (
-            <MenuInner items={menus} theme="dark" />
-          )}
+          <div className="h-full overflow-y-auto overflow-x-hidden">
+            {collapsed ? (
+              <CollapsedMenu items={menus} />
+            ) : (
+              <MenuInner items={menus} theme="dark" />
+            )}
+          </div>
         </MenuProvider>
       </div>
     </>
