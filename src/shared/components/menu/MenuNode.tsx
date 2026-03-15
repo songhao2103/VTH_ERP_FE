@@ -7,14 +7,15 @@ import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
 
 const MenuNode: React.FC<IMenuNodeProps> = ({ level, item, theme }) => {
-  const { isOpenAccordion } = useMenuContext();
+  const { isOpenAccordion, isCollapsed } = useMenuContext();
 
   if (item.heading) {
     return (
       <div
         className={clsx(
-          "px-3 pb-2 pt-5 text-[11px] font-semibold uppercase tracking-[0.18em]",
+          "px-3 pb-2 pt-2 text-[11px] font-semibold uppercase tracking-[0.18em]",
           theme === "dark" ? "text-zinc-400" : "text-zinc-500",
+          isCollapsed ? "hidden" : "block",
         )}
       >
         {item.heading}
@@ -26,7 +27,7 @@ const MenuNode: React.FC<IMenuNodeProps> = ({ level, item, theme }) => {
     return (
       <div
         className={clsx(
-          "my-3 border-t",
+          "my-1 border-t",
           theme === "dark" ? "border-zinc-800" : "border-zinc-200",
         )}
       />
@@ -58,7 +59,7 @@ const MenuNode: React.FC<IMenuNodeProps> = ({ level, item, theme }) => {
           >
             <div
               className={clsx(
-                "ml-6 border-l pl-2",
+                "ml-2 border-l pl-2",
                 theme === "dark" ? "border-zinc-800" : "border-zinc-200",
               )}
             >

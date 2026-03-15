@@ -5,7 +5,7 @@ import MenuInner from "./MenuInner";
 import MobileMenu from "./MenuMobile";
 import MenuProvider from "./MenuProvider";
 
-const Menu: React.FC<IMenuProps> = ({ menus, collapsed, isAdmin }) => {
+const Menu: React.FC<IMenuProps> = ({ menus = [], collapsed, isAdmin }) => {
   return (
     <>
       <div className="lg:hidden">

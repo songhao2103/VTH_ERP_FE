@@ -7,9 +7,7 @@ interface SidebarContentProps {
 const SidebarContent: React.FC<SidebarContentProps> = ({ collapsed }) => {
   return (
     <div>
-      <div>
-        <Menu menus={menuConfig} collapsed={collapsed} />
-      </div>
+      <Menu menus={menuConfig} collapsed={collapsed} />
     </div>
   );
 };

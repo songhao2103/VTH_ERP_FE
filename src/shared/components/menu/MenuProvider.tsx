@@ -55,6 +55,7 @@ const MenuProvider: React.FC<IMenuProviderProps> = ({
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setOpenAccordions((prev) => {
       const next = new Set(prev);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       activeKeys.forEach((key: any) => next.add(key));
       return next;
     });

@@ -9,7 +9,7 @@ export interface IMenuProps {
   collapsed?: boolean;
   isAdmin?: boolean;
   className?: string;
-  menus: IMenuItemConfig[];
+  menus?: IMenuItemConfig[];
 }
 
 export interface IMenuContext {

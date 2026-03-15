@@ -13,12 +13,12 @@ const Sidebar = () => {
   return (
     <aside
       className={clsx(
-        "hidden h-screen shrink-0 border-r border-zinc-800 bg-black text-white lg:block",
+        "hidden h-screen shrink-0 border-r border-zinc-800 transition-all bg-black text-white lg:block",
         collapsed ? "w-20" : "w-72",
       )}
     >
       <SidebarHeader collapsed={collapsed} onToggle={handleToggle} />
-      <SidebarContent />
+      <SidebarContent collapsed={collapsed} />
     </aside>
   );
 };

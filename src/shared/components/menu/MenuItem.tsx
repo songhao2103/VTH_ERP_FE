@@ -14,7 +14,7 @@ const getItemClasses = (
   disabled?: boolean,
 ) => {
   return clsx(
-    "group flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200",
+    "group flex w-full items-center gap-2 rounded-xl px-2 py-1 text-sm font-medium transition-all duration-200",
     {
       "cursor-not-allowed opacity-50": disabled,
       "cursor-pointer": !disabled,
@@ -46,10 +46,7 @@ const MenuItem: React.FC<IMenuItemProps> = ({
     <>
       <MenuIcon icon={item.icon} fallback={fallback} active={active} />
       <div className="flex min-w-0 flex-1 items-center gap-2">
-        <MenuLabel
-          title={item.title || "Menu"}
-          className="min-w-0 flex-1 truncate"
-        />
+        <MenuLabel title={item.title || "Menu"} className="min-w-0 truncate" />
         {item.badge && (
           <span
             className={clsx(
