@@ -1,20 +1,11 @@
 /////////////////////////////////////////////////////////////////////////////////////
 //======     Layout gốc cho toàn app     ========
 /////////////////////////////////////////////////////////////////////////////////////
-import { createRootRouteWithContext, Outlet } from "@tanstack/react-router";
-import type { QueryClient } from "@tanstack/react-query";
 import MainLayout from "@/layouts/MainLayout";
-// import type { AuthStore } from "@/app/store/authStore";
+import type { AppRouterContext } from "@/app/router/router.context";
+import { createRootRouteWithContext, Outlet } from "@tanstack/react-router";
 
-// import { AppErrorFallback } from "@/shared/components/feedback/AppErrorFallback";
-
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-export interface RouterAppContext {
-  //   auth: AuthStore;
-  //   queryClient: QueryClient;
-}
-
-export const Route = createRootRouteWithContext<RouterAppContext>()({
+export const Route = createRootRouteWithContext<AppRouterContext>()({
   component: () => (
     <MainLayout>
       <Outlet />

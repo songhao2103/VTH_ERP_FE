@@ -1,9 +1,6 @@
+import LoginForm from "@/modules/auth/components/LoginForm";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_public/auth/login")({
-  component: RouteComponent,
+  component: LoginForm,
 });
-
-function RouteComponent() {
-  return <div>Hello "/_public/auth/login"!</div>;
-}

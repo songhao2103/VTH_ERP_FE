@@ -1,16 +1,16 @@
 import { createRouter } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen";
+import type { AppRouterContext } from "./router.context";
 
 export const router = createRouter({
   routeTree,
   context: {
     auth: undefined!,
     queryClient: undefined!,
-  },
+  } as AppRouterContext,
+  scrollRestoration: true,
   defaultPreload: "intent",
   defaultPreloadStaleTime: 0,
-  scrollRestoration: true,
-  defaultNotFoundComponent: () => <div>Page not found</div>,
 });
 
 declare module "@tanstack/react-router" {
