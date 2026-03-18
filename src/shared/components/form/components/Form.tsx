@@ -1,18 +1,18 @@
 import * as React from "react";
-import { useFormContext } from "./FormContext";
 import { cn } from "../form.utils";
+import { useFormContext } from "./FormContext";
 
-export type AppFormProps = Omit<
+export type FormRootProps = Omit<
   React.ComponentPropsWithoutRef<"form">,
   "onSubmit"
 >;
 
-export function AppForm({
+export function FormRoot({
   className,
   noValidate = true,
   children,
   ...props
-}: AppFormProps): React.JSX.Element {
+}: FormRootProps): React.JSX.Element {
   const form = useFormContext();
 
   const handleSubmit = React.useCallback(

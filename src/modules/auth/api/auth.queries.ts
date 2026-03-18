@@ -1,7 +1,7 @@
 import type { ApiErrorPayload } from "@/app/http/http.types";
 import { useAppMutation } from "@/app/query/useAppMutation";
 import { authApi } from "./auth.api";
-import type { PayloadLogin } from "../type/auth.payload";
+import type { PayloadLogin } from "../type/auth.api";
 
 export const useLogin = ({
   onError,

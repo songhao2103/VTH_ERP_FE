@@ -65,3 +65,9 @@ export interface FormFieldListeners<
   onBlur?: (context: FieldValidationContext<TValues, TName>) => void;
   onMount?: (context: FieldValidationContext<TValues, TName>) => void;
 }
+
+export type EventValidatorForm =
+  | "onChange"
+  | "onBlur"
+  | "onSubmit"
+  | "onDynamic";

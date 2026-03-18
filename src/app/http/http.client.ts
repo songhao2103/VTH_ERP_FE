@@ -1,10 +1,11 @@
+import { ENVIRONMENTS } from "@/shared/constants/enviroment.constant";
 import axios, {
   type AxiosInstance,
   type InternalAxiosRequestConfig,
 } from "axios";
 import { HTTP_CONFIG } from "./http.config";
-import { tokenService } from "./token.service";
 import { setAuthorizationHeader } from "./http.utils";
+import { tokenService } from "./token.service";
 
 type CreateHttpClientOptions = {
   withAuth: boolean;
@@ -14,7 +15,7 @@ export const createHttpClient = ({
   withAuth,
 }: CreateHttpClientOptions): AxiosInstance => {
   const instance = axios.create({
-    baseURL: HTTP_CONFIG.baseURL,
+    baseURL: ENVIRONMENTS.domain,
     timeout: HTTP_CONFIG.timeout,
     headers: {
       Accept: "application/json",
