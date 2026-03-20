@@ -1,7 +1,22 @@
-import React from "react";
+import { StorageService } from "@/services/storage";
+import { Route as LoginRoute } from "@/routes/_public/auth/login";
+import { useNavigate } from "@tanstack/react-router";
 
 const UserMenuDropdown = () => {
-  return <div>Các mục cài đặt cho menu</div>;
+  const navigate = useNavigate();
+
+  return (
+    <div>
+      <div
+        onClick={() => {
+          StorageService.clearAll();
+          navigate({ to: LoginRoute.to, replace: true });
+        }}
+      >
+        Đăng xuất
+      </div>
+    </div>
+  );
 };
 
 export default UserMenuDropdown;
