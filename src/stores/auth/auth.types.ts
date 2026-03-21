@@ -6,3 +6,8 @@ export interface AuthStoreState {
   permissions?: string[];
   roles: UserRole[];
 }
+
+export interface AuthStore extends AuthStoreState {
+  setAuth: (auth: AuthStoreState) => void;
+  logout: () => void;
+}
