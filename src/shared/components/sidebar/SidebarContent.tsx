@@ -1,5 +1,5 @@
+import { menuConfig } from "@/shared/components/menu/menu.config";
 import Menu from "../menu/Menu";
-import { menuConfig } from "@/shared/components/menu/constant";
 
 interface SidebarContentProps {
   collapsed?: boolean;

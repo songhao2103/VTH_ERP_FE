@@ -1,4 +1,4 @@
-import type { FormLoginData } from "../type/auth.client";
+import type { FormLoginData } from "../types/auth.type.client";
 
 export const FROM_LOGIN_DEFAULT_VALUES: FormLoginData = {
   account: "",

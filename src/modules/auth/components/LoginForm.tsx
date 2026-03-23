@@ -1,9 +1,9 @@
 import { createFormValidator } from "@/shared/components/form/form.utils";
 import { useAppForm } from "@/shared/components/form/useAppForm";
 import { FROM_LOGIN_DEFAULT_VALUES } from "../constant/auth.constant";
-import { formLoginDataSchema } from "../type/auth.client";
+import { formLoginDataSchema } from "../types/auth.type.client";
 import { useLogin } from "../api/auth.queries";
-import type { ResponseLogin } from "../type/auth.api";
+import type { ResponseLogin } from "../types/auth.type.api";
 import type { User } from "@/shared/types/user";
 import { STORAGE_KEYS, StorageService } from "@/services/storage";
 import { Route as HomeRoute } from "@/routes/_private/_home/route";

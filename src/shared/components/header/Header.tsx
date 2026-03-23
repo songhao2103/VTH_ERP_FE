@@ -1,7 +1,7 @@
 import ToggleTheme from "@/shared/components/header/toggle-theme/ToggleTheme";
 import UserMenu from "@/shared/components/header/user-menu/UserMenu";
-import { menuConfig } from "@/shared/components/menu/constant";
 import Menu from "@/shared/components/menu/Menu";
+import { menuConfig } from "@/shared/components/menu/menu.config";
 
 const Header = () => {
   return (

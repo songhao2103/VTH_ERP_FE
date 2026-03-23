@@ -32,6 +32,7 @@ const InnerProvider = () => {
     roles: [] as UserRole[],
   });
 
+  if (isLoading) return <p>Loading...</p>;
   return <RouterProvider router={router} />;
 };
 export default InnerProvider;
