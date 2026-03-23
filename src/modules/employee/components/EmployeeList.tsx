@@ -1,25 +1,25 @@
-import { useGetEmployeeList } from "@/modules/employee/api/employee.queries";
+import { employeeListQueryOptions } from "@/modules/employee/api/employee.queries";
 import { employeeColumns } from "@/modules/employee/constant/employee.columns";
 import { makeEmployees } from "@/modules/employee/constant/employee.constant";
+import { Route as EmployeeRoute } from "@/routes/_private/employee/route";
 import type { EmployeeRow } from "@/modules/employee/types/employee.type.client";
 import { DataGrid } from "@/shared/components/data-grid/DataGrid";
-import type { DataGridHandle } from "@/shared/components/data-grid/dataGrid.types";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { Route } from "@tanstack/react-router";
-import type { RowSelectionState } from "@tanstack/react-table";
+
 import React from "react";
 
 const EmployeeList = () => {
-  const gridRef = React.useRef<DataGridHandle>(null);
-  const param = Route.useParams();
+  const search = EmployeeRoute.useSearch();
 
-  const { data } = useSuspenseQuery(useGetEmployeeList());
+  const { data } = useSuspenseQuery(employeeListQueryOptions(search));
   const allRows = React.useMemo(() => makeEmployees(10000), []);
   const [pageIndex, setPageIndex] = React.useState(0);
   const [pageSize, setPageSize] = React.useState(20);
   const [selectedRowIds, setSelectedRowIds] = React.useState<RowSelectionState>(
     {},
   );
+
+  console.log("EmployeeList render", { search, data });
 
   const pageRows = React.useMemo(() => {
     const start = pageIndex * pageSize;

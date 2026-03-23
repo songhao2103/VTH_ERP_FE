@@ -6,8 +6,8 @@ export const EMPLOYEE_QUERY_KEYS = {
   list: (params: EmployeeParams) => ["users", "list", params] as const,
 };
 
-export const useGetEmployeeList = (params: EmployeeParams) => {
-  queryOptions({
+export const employeeListQueryOptions = (params: EmployeeParams) => {
+  return queryOptions({
     queryKey: EMPLOYEE_QUERY_KEYS.list(params),
     queryFn: async () => {
       const response = await EmployeeApis.list(params);
