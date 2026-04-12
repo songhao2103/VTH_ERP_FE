@@ -1,5 +1,6 @@
 import { employeeColumns } from "@/modules/employee/constant/employee.columns";
 import { makeEmployees } from "@/modules/employee/constant/employee.constant";
+import { Route as EmployeeRoute } from "@/routes/_private/employee/route";
 import type { EmployeeRow } from "@/modules/employee/types/employee.type.client";
 import { DataGrid } from "@/shared/components/data-grid/DataGrid";
 import type { DataGridHandle } from "@/shared/components/data-grid/dataGrid.types";

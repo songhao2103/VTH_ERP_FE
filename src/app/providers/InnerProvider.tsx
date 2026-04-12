@@ -44,6 +44,7 @@ const InnerProvider = ({ queryClient }: InnerProviderProps) => {
   );
 
   if (isLoading) return <p>Loading...</p>;
+
   return <RouterProvider router={router} />;
 };
 export default InnerProvider;
