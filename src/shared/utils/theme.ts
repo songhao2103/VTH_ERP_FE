@@ -1,4 +1,4 @@
-import { STORAGE_KEY } from "../constants/storageKey";
+import { STORAGE_KEYS } from "@/services/storage";
 import {
   getLocalStorageData,
   setLocalStorageData,
@@ -7,7 +7,7 @@ import {
 export type ThemeMode = "light" | "dark";
 
 export function getStoredTheme(): ThemeMode | null {
-  const value = getLocalStorageData<string>(STORAGE_KEY.THEME);
+  const value = getLocalStorageData<string>(STORAGE_KEYS.THEME);
   return value === "light" || value === "dark" ? value : null;
 }
 
@@ -20,7 +20,7 @@ export function applyTheme(theme: ThemeMode) {
   root.classList.remove("scheme-light", "scheme-dark");
   root.classList.add(theme === "dark" ? "scheme-dark" : "scheme-light");
 
-  setLocalStorageData(STORAGE_KEY.THEME, theme);
+  setLocalStorageData(STORAGE_KEYS.THEME, theme);
 }
 
 export function initTheme() {

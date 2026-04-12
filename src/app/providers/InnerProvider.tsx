@@ -4,10 +4,15 @@ import type { UserRole } from "@/shared/constants/user_role";
 import type { User } from "@/shared/types/user";
 import { useAuthStore } from "@/stores/auth/auth.store";
 import { RouterProvider } from "@tanstack/react-router";
+import type { QueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { initRouter } from "../router/router";
 
-const InnerProvider = () => {
+interface InnerProviderProps {
+  queryClient: QueryClient;
+}
+
+const InnerProvider = ({ queryClient }: InnerProviderProps) => {
   const { user, setAuth } = useAuthStore();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -15,7 +20,10 @@ const InnerProvider = () => {
     setIsLoading(true);
     if (!user) {
       const user = StorageService.getData<User>(STORAGE_KEYS.USER);
-      if (!user) return;
+      if (!user) {
+        setIsLoading(false);
+        return;
+      }
 
       setAuth({
         user: user,
@@ -26,11 +34,14 @@ const InnerProvider = () => {
     setIsLoading(false);
   }, [user, setAuth]);
 
-  const router = initRouter({
-    user: user!,
-    permissions: [] as string[],
-    roles: [] as UserRole[],
-  });
+  const router = initRouter(
+    {
+      user: user!,
+      permissions: [] as string[],
+      roles: [] as UserRole[],
+    },
+    queryClient,
+  );
 
   if (isLoading) return <p>Loading...</p>;
   return <RouterProvider router={router} />;

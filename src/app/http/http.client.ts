@@ -29,6 +29,7 @@ export const createHttpClient = ({
       if (withAuth && !config.skipAuth) {
         const accessToken = tokenService.getAccessToken();
 
+        console.log("TOKEN:", accessToken);
         if (accessToken) {
           setAuthorizationHeader(config, accessToken);
         }

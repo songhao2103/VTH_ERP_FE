@@ -16,7 +16,8 @@ export const useLogin = ({
       onError?.(error);
     },
     onSuccess: (data) => {
-      onSuccess?.(data.data);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      onSuccess?.((data.data as any).data);
     },
   });
 };

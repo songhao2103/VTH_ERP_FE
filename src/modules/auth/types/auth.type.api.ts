@@ -1,6 +1,6 @@
 export interface PayloadLogin {
-  account: string;
   password: string;
+  userName: string;
 }
 
 export interface ResponseLogin {

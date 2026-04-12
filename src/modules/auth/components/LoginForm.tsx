@@ -38,9 +38,10 @@ const LoginForm = () => {
         roles: ["ADMIN"],
         avatar: data.user.avartar,
       };
-      // StorageService.setData<string>(STORAGE_KEYS.ACCESS_TOKEN, accessToken);
-      // StorageService.setData<string>(STORAGE_KEYS.REFRESH_TOKEN, refreshToken);
-      // StorageService.setData<User>(STORAGE_KEYS.USER, user);
+      StorageService.setData<string>(STORAGE_KEYS.ACCESS_TOKEN, accessToken);
+      StorageService.setData<string>(STORAGE_KEYS.REFRESH_TOKEN, refreshToken);
+      StorageService.setData<User>(STORAGE_KEYS.USER, user);
+      navigate({ to: HomeRoute.to });
     },
   });
 
@@ -48,23 +49,23 @@ const LoginForm = () => {
     defaultValues: FROM_LOGIN_DEFAULT_VALUES,
     validators: createFormValidator(formLoginDataSchema),
     onSubmit: (values) => {
-      StorageService.setData<string>(
-        STORAGE_KEYS.ACCESS_TOKEN,
-        fakeAuthData.accessToken,
-      );
-      StorageService.setData<string>(
-        STORAGE_KEYS.REFRESH_TOKEN,
-        fakeAuthData.refreshToken,
-      );
-      StorageService.setData<User>(
-        STORAGE_KEYS.USER,
-        fakeAuthData.user as User,
-      );
-      navigate({ to: HomeRoute.to });
-      // mtLogin({
-      //   account: values.value.account,
-      //   password: values.value.password,
-      // });
+      // StorageService.setData<string>(
+      //   STORAGE_KEYS.ACCESS_TOKEN,
+      //   fakeAuthData.accessToken,
+      // );
+      // StorageService.setData<string>(
+      //   STORAGE_KEYS.REFRESH_TOKEN,
+      //   fakeAuthData.refreshToken,
+      // );
+      // StorageService.setData<User>(
+      //   STORAGE_KEYS.USER,
+      //   fakeAuthData.user as User,
+      // );
+      // navigate({ to: HomeRoute.to });
+      mtLogin({
+        userName: values.value.account,
+        password: values.value.password,
+      });
     },
   });
 

@@ -1,4 +1,4 @@
-import { STORAGE_KEY } from "@/shared/constants/storageKey";
+import { STORAGE_KEYS } from "@/services/storage";
 import {
   getLocalStorageData,
   removeLocalStorageData,
@@ -7,23 +7,23 @@ import {
 
 export const tokenService = {
   getAccessToken() {
-    return getLocalStorageData<string>(STORAGE_KEY.ACCESS_TOKEN) || null;
+    return getLocalStorageData<string>(STORAGE_KEYS.ACCESS_TOKEN) || null;
   },
 
   getRefreshToken() {
-    return getLocalStorageData<string>(STORAGE_KEY.REFRESH_TOKEN) || null;
+    return getLocalStorageData<string>(STORAGE_KEYS.REFRESH_TOKEN) || null;
   },
 
   setTokens(accessToken: string, refreshToken?: string) {
-    setLocalStorageData(STORAGE_KEY.ACCESS_TOKEN, accessToken);
+    setLocalStorageData(STORAGE_KEYS.ACCESS_TOKEN, accessToken);
 
     if (refreshToken) {
-      setLocalStorageData(STORAGE_KEY.REFRESH_TOKEN, refreshToken);
+      setLocalStorageData(STORAGE_KEYS.REFRESH_TOKEN, refreshToken);
     }
   },
 
   clearTokens() {
-    removeLocalStorageData(STORAGE_KEY.ACCESS_TOKEN);
-    removeLocalStorageData(STORAGE_KEY.REFRESH_TOKEN);
+    removeLocalStorageData(STORAGE_KEYS.ACCESS_TOKEN);
+    removeLocalStorageData(STORAGE_KEYS.REFRESH_TOKEN);
   },
 };

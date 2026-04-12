@@ -2,6 +2,7 @@ export const STORAGE_KEYS = {
   USER: "USER",
   ACCESS_TOKEN: "ACCESS_TOKEN",
   REFRESH_TOKEN: "REFRESH_TOKEN",
+  THEME: "THEME",
 } as const;
 
 export type StorageKey = keyof typeof STORAGE_KEYS;
@@ -10,6 +11,7 @@ export const StorageService = {
   getData<TData>(key: StorageKey): TData | null {
     const item = localStorage.getItem(STORAGE_KEYS[key]);
     if (!item) return null;
+
     try {
       return JSON.parse(item) as TData;
     } catch (error) {
@@ -17,6 +19,7 @@ export const StorageService = {
       return null;
     }
   },
+
   setData<TData>(key: StorageKey, data: TData): void {
     try {
       const item = JSON.stringify(data);
@@ -28,6 +31,7 @@ export const StorageService = {
       );
     }
   },
+
   removeData(key: StorageKey): void {
     localStorage.removeItem(STORAGE_KEYS[key]);
   },
