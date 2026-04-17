@@ -1,3 +1,71 @@
+/* #region bg */
+@utility bg-white {
+  background-color: rgb(var(--white));
+}
+/* #enregion */
+
+/* #region CARD */
+
+@utility bg-card {
+  background-color: rgb(var(--bg-card));
+}
+
+@utility bg-body {
+  background-color: rgb(var(--bg-card));
+}
+
+@utility card {
+  background-color: rgb(var(--bg-card));
+  color: rgb(var(--text-primary));
+  border: 1px solid rgb(var(--border-default) / 0.5);
+  border-radius: 0.75rem; /* rounded-xl */
+  padding: 1rem;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.04);
+
+  @variant dark {
+    border-color: rgb(var(--border-default) / 0.3);
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.2);
+  }
+}
+
+/* hover nhẹ cho card */
+@utility card-hover {
+  transition-property: transform, box-shadow, background-color;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  @variant hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgb(0 0 0 / 0.08);
+  }
+
+  @variant dark {
+    @variant hover {
+      box-shadow: 0 8px 20px rgb(0 0 0 / 0.4);
+    }
+  }
+}
+
+/* card flat (no shadow) */
+@utility card-flat {
+  box-shadow: none;
+  border: 1px solid rgb(var(--border-default) / 0.6);
+}
+
+/* card clickable */
+@utility card-interactive {
+  cursor: pointer;
+
+  @variant hover {
+    background-color: rgb(var(--surface-card) / 0.8);
+  }
+
+  @variant active {
+    transform: scale(0.98);
+  }
+}
+/* #endregion */
+
 /* #region TRANSITION */
 @utility transition-interactive {
   transition-property:

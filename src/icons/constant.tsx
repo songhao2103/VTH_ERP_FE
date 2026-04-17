@@ -71,7 +71,6 @@ export const SVG_ICONS = {
     class: "lucide lucide-check-icon lucide-check",
     children: <path d="M20 6 9 17l-5-5" />,
   },
-
   checlCheck: {
     class: "lucide lucide-check-check-icon lucide-check-check",
     children: (

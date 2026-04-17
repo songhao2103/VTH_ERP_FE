@@ -14,6 +14,7 @@ import { Route as PrivateRouteRouteImport } from './../../routes/_private/route'
 import { Route as PrivateEmployeeRouteRouteImport } from './../../routes/_private/employee/route'
 import { Route as PrivateHomeRouteRouteImport } from './../../routes/_private/_home/route'
 import { Route as PublicAuthLoginRouteImport } from './../../routes/_public/auth/login'
+import { Route as PrivateDemoDataGridRouteRouteImport } from './../../routes/_private/demo/data-grid/route'
 
 const PublicRouteRoute = PublicRouteRouteImport.update({
   id: '/_public',
@@ -37,15 +38,23 @@ const PublicAuthLoginRoute = PublicAuthLoginRouteImport.update({
   path: '/auth/login',
   getParentRoute: () => PublicRouteRoute,
 } as any)
+const PrivateDemoDataGridRouteRoute =
+  PrivateDemoDataGridRouteRouteImport.update({
+    id: '/demo/data-grid',
+    path: '/demo/data-grid',
+    getParentRoute: () => PrivateRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof PrivateHomeRouteRoute
   '/employee': typeof PrivateEmployeeRouteRoute
+  '/demo/data-grid': typeof PrivateDemoDataGridRouteRoute
   '/auth/login': typeof PublicAuthLoginRoute
 }
 export interface FileRoutesByTo {
   '/': typeof PrivateHomeRouteRoute
   '/employee': typeof PrivateEmployeeRouteRoute
+  '/demo/data-grid': typeof PrivateDemoDataGridRouteRoute
   '/auth/login': typeof PublicAuthLoginRoute
 }
 export interface FileRoutesById {
@@ -54,19 +63,21 @@ export interface FileRoutesById {
   '/_public': typeof PublicRouteRouteWithChildren
   '/_private/_home': typeof PrivateHomeRouteRoute
   '/_private/employee': typeof PrivateEmployeeRouteRoute
+  '/_private/demo/data-grid': typeof PrivateDemoDataGridRouteRoute
   '/_public/auth/login': typeof PublicAuthLoginRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/employee' | '/auth/login'
+  fullPaths: '/' | '/employee' | '/demo/data-grid' | '/auth/login'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/employee' | '/auth/login'
+  to: '/' | '/employee' | '/demo/data-grid' | '/auth/login'
   id:
     | '__root__'
     | '/_private'
     | '/_public'
     | '/_private/_home'
     | '/_private/employee'
+    | '/_private/demo/data-grid'
     | '/_public/auth/login'
   fileRoutesById: FileRoutesById
 }
@@ -112,17 +123,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PublicAuthLoginRouteImport
       parentRoute: typeof PublicRouteRoute
     }
+    '/_private/demo/data-grid': {
+      id: '/_private/demo/data-grid'
+      path: '/demo/data-grid'
+      fullPath: '/demo/data-grid'
+      preLoaderRoute: typeof PrivateDemoDataGridRouteRouteImport
+      parentRoute: typeof PrivateRouteRoute
+    }
   }
 }
 
 interface PrivateRouteRouteChildren {
   PrivateHomeRouteRoute: typeof PrivateHomeRouteRoute
   PrivateEmployeeRouteRoute: typeof PrivateEmployeeRouteRoute
+  PrivateDemoDataGridRouteRoute: typeof PrivateDemoDataGridRouteRoute
 }
 
 const PrivateRouteRouteChildren: PrivateRouteRouteChildren = {
   PrivateHomeRouteRoute: PrivateHomeRouteRoute,
   PrivateEmployeeRouteRoute: PrivateEmployeeRouteRoute,
+  PrivateDemoDataGridRouteRoute: PrivateDemoDataGridRouteRoute,
 }
 
 const PrivateRouteRouteWithChildren = PrivateRouteRoute._addFileChildren(

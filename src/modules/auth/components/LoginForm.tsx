@@ -9,20 +9,6 @@ import { STORAGE_KEYS, StorageService } from "@/services/storage";
 import { Route as HomeRoute } from "@/routes/_private/_home/route";
 import { useNavigate } from "@tanstack/react-router";
 
-export const fakeAuthData = {
-  accessToken: "fake_access_token_123",
-  refreshToken: "fake_refresh_token_123",
-  user: {
-    id: "1",
-    username: "admin",
-    email: "admin@gmail.com",
-    account: "admin",
-    roles: ["ADMIN"],
-    avatar: "https://i.pravatar.cc/150?img=3",
-    permissions: ["user.view", "user.create", "user.update", "user.delete"],
-  },
-};
-
 const LoginForm = () => {
   const navigate = useNavigate();
 
@@ -49,19 +35,6 @@ const LoginForm = () => {
     defaultValues: FROM_LOGIN_DEFAULT_VALUES,
     validators: createFormValidator(formLoginDataSchema),
     onSubmit: (values) => {
-      // StorageService.setData<string>(
-      //   STORAGE_KEYS.ACCESS_TOKEN,
-      //   fakeAuthData.accessToken,
-      // );
-      // StorageService.setData<string>(
-      //   STORAGE_KEYS.REFRESH_TOKEN,
-      //   fakeAuthData.refreshToken,
-      // );
-      // StorageService.setData<User>(
-      //   STORAGE_KEYS.USER,
-      //   fakeAuthData.user as User,
-      // );
-      // navigate({ to: HomeRoute.to });
       mtLogin({
         userName: values.value.account,
         password: values.value.password,

@@ -91,4 +91,16 @@ export const menuConfig: IMenuItemConfig[] = [
     title: "Tính năng sắp ra mắt",
     disabled: true,
   },
+  {
+    title: "Demo",
+    collapse: true,
+    rootPath: "/demo",
+    children: [
+      {
+        title: "Data grid",
+        path: "/demo/data-grid",
+        childrenIndex: 0,
+      },
+    ],
+  },
 ];
